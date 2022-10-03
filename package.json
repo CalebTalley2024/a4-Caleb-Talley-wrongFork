@@ -1,0 +1,20 @@
+{
+  "name": "a4-calebtalley2024",
+  "version": "1.0.0",
+  "description": "your hosting link e.g.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CalebTalley2024/a4-CalebTalley2024.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CalebTalley2024/a4-CalebTalley2024/issues"
+  },
+  "homepage": "https://github.com/CalebTalley2024/a4-CalebTalley2024#readme"
+}
