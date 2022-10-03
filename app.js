@@ -176,7 +176,7 @@ function renderChart() {
     .selectAll(".bar")
     .data(selectedData, (data) => data.designation)
     .exit()
-    .remove();
+    .remove(); // removes any redundant data
 
   // displaying labels
   chart
@@ -239,6 +239,7 @@ panePHA.on("change", (pha) => {
     selectedData = spaceData;
   }
   renderChart();
+  renderChartCircle();
 });
 
 const hMagPane = new Tweakpane.Pane({
@@ -264,6 +265,7 @@ hMagPane.on("change", (hMag) => {
   // selectedData = filterData;
 
   renderChart();
+  renderChartCircle();
 });
 
 const yearPane = new Tweakpane.Pane({
@@ -293,6 +295,7 @@ yearPane.on("change", (year) => {
   }
 
   renderChart();
+  renderChartCircle();
 });
 
 const orbitPane = new Tweakpane.Pane({
@@ -319,6 +322,7 @@ orbitPane.on("change", (orbit) => {
     selectedData = spaceData;
   }
   renderChart();
+  renderChartCircle();
 });
 
 const restartPane = new Tweakpane.Pane({
@@ -332,74 +336,13 @@ const btn = restartPane.addButton({
 btn.on("click", () => {
   selectedData = spaceData;
   renderChart();
+  renderChartCircle();
 });
 
-/////////////// scatterplot
 
-// const CIRCLE_MARGINS = { top: 30, bottom: 10 };
-// const CIRCLE_CHART_WIDTH = 800;
-// const CIRCLE_CHART_HEIGHT = 600 - CIRCLE_MARGINS.top - CIRCLE_MARGINS.bottom;
 
-// const radius = Math.min(CIRCLE_CHART_WIDTH,CIRCLE_CHART_HEIGHT)/2 - CIRCLE_MARGINS
-// const chartContainerCircle = d3
-//         .select("#chartCircle")
-//         .select(svg)
-//         .attr("width", CIRCLE_CHART_WIDTH)
-//         .attr("height", CIRCLE_CHART_HEIGHT + CIRCLE_MARGINS.top + CIRCLE_MARGINS.bottom)
-
-// // put the circle in the middle of the container
-// chartCircle = chartContainerCircle
-// .append("g")
-// .attr("transform", "translate(" + CIRCLE_CHART_WIDTH / 2 + "," + CIRCLE_CHART_HEIGHT / 2 + ")");
-
-// //
-
-// // set the color scale
-// const color = d3.scaleOrdinal()
-// .domain(["Y","N"])
-// .range(d3.schemeDark2)
-
-// function renderChartCircle(){
-
-// // make position for each group on the pie
-
-// const pie = d3.pie()
-//     .value(d => d.pha)
-//     // make sure values are in order from smallest to largest
-//     .sort(a,b => d3.ascending(a.pha,b.pha))
-
-// // we are still using selectedData
-// const data_ready = pie(d3.entries(selectedData))
-
-// // map circle to the data?
-// const u = chartCircle.selectAll("path")
-//     .data(data_ready)
-
-// //Build the pie chart: one arc at a time
-// .enter()
-// .append('path')
-// .merge(u)
-// .transition()
-// .duration(1000)
-// .attr('d', d3.arc()
-//   .innerRadius(0)
-//   .outerRadius(radius)
-// )
-// .attr('fill', d => color(d.pha))
-// .attr("stroke", "white")
-//     .style("stroke-width", "2px")
-//     .style("opacity", 1)
-
-//  // remove the group that is not present anymore
-//  u
-//  .exit()
-//  .remove()
-
-// }
-
-// renderChartCircle()
-
-const data = [2, 4, 8, 10, 14, 20];
+// const data = ["2", "4", "8", 10, 14, 20];
+// const data1 = [{key:"hello",value:1},{key:"world",value:2}]
 const CIRCLE_MARGINS = { top: 30, bottom: 10 },
   CIRCLE_CHART_WIDTH = 800,
   CIRCLE_CHART_HEIGHT = 600 - CIRCLE_MARGINS.top - CIRCLE_MARGINS.bottom;
@@ -414,22 +357,45 @@ const chartCircle = chartContainerCircle
     .attr('transform', `translate(${CIRCLE_CHART_WIDTH/2},${CIRCLE_CHART_HEIGHT/2})`)
 
 
-const color = d3.scaleOrdinal(['red','orange','yellow','green','blue','purple']) // change this
+const color = d3.scaleOrdinal(['blue','indigo']) // change this
 const pie = d3.pie()
 const arc = d3.arc()
                     .innerRadius(0)
                     .outerRadius(radius);
-// const arcs = chartCircle
+
+let phasLength = 0;
+let notPhasLength  = 0;
 
 function renderChartCircle(){
+    // the  objects that are PHA and not PHA
+    const phas = selectedData.filter(d => d.pha ==="Y")
+    const notPhas = selectedData.filter(d => d.pha ==="N")
+
+    // find the number of PHA's and not PHA's you have
+     phasLength = phas.length
+     notPhasLength = notPhas.length
+
+     const phaArray =[phasLength,notPhasLength]
+//////// adding a circle
     chartCircle
     .selectAll('arc')
-    .data(pie(data)) // change this
+    // // to use data here, you have to map the JSON array's value
+    // .data(pie(data1.map(data1 => data1.value))) // change this
+    // .data(pie(data))
+    .data(pie(phaArray))
     .enter()
     .append('g')
     .attr('class', 'arc')
     .append('path') // change this
     .attr('fill', (d,i) => color(i))
     .attr('d', arc);
+
+
+/////// deleting a circle
+chartCircle
+    .selectAll('arc')
+    .data(pie(phaArray))
+    .exit()
+    .remove();
 }
 renderChartCircle()
