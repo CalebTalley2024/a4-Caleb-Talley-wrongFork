@@ -109,6 +109,7 @@ const spaceData = [
   },
 ]; // currently not showing DUPLICATES
 
+//////////////////// Bar
 //gets the year out of the discovery_date field
 spaceData.forEach((a) => {
   a.discovery_date = a.discovery_date.substr(0, 4);
@@ -116,9 +117,9 @@ spaceData.forEach((a) => {
 
 console.log(spaceData);
 
-const MARGINS = { top: 30, bottom: 10 };
+const BAR_MARGINS = { top: 30, bottom: 10 };
 const CHART_WIDTH = 800;
-const CHART_HEIGHT = 600 - MARGINS.top - MARGINS.bottom;
+const CHART_HEIGHT = 600 - BAR_MARGINS.top - BAR_MARGINS.bottom;
 
 //x: Designation
 //y: period year
@@ -129,7 +130,7 @@ const y = d3.scaleLinear().range([CHART_HEIGHT, 0]);
 const chartContainer = d3
   .select("svg")
   .attr("width", CHART_WIDTH)
-  .attr("height", CHART_HEIGHT + MARGINS.top + MARGINS.bottom);
+  .attr("height", CHART_HEIGHT + BAR_MARGINS.top + BAR_MARGINS.bottom);
 
 // used for change
 let selectedData = spaceData;
@@ -199,8 +200,6 @@ function renderChart() {
 
 renderChart();
 
-
-
 const PARAMS = {
   onlyPHA: false,
 
@@ -208,7 +207,7 @@ const PARAMS = {
 
   onlyYear: "N/A",
 
-  OrbitClass: "All"
+  OrbitClass: "All",
 };
 const panePHA = new Tweakpane.Pane({
   // puts pane in a container
@@ -297,45 +296,140 @@ yearPane.on("change", (year) => {
 });
 
 const orbitPane = new Tweakpane.Pane({
-    container: document.querySelector("#data"),
-  });
-
-orbitPane.addInput(PARAMS, "OrbitClass",{
-
-    options:{
-        All: "All",
-        Apollo: "Apollo",
-        Amor: "Amor",
-        Aten: "Aten",
-        Comet: "Comet",
-        JupiterFamilyComet: "Jupiter-family Comet",
-        HalleyTypeComet: "Halley-type Comet*",
-    }
-
-})
-orbitPane.on("change", (orbit)=>{
-    // restart data each time this function is used
-    selectedData = spaceData;
-    if (orbit.value != "All") {
-      selectedData = selectedData.filter((d) => d.orbit_class == orbit.value);
-    } else {
-      selectedData = spaceData;
-    }
-    renderChart();
-
-})
-  
-const restartPane = new Tweakpane.Pane({
-    container: document.querySelector("#data"),
-  });
-
-const btn = restartPane.addButton({
-    title: 'restart',
-
+  container: document.querySelector("#data"),
 });
 
-btn.on('click',() =>{
+orbitPane.addInput(PARAMS, "OrbitClass", {
+  options: {
+    All: "All",
+    Apollo: "Apollo",
+    Amor: "Amor",
+    Aten: "Aten",
+    Comet: "Comet",
+    JupiterFamilyComet: "Jupiter-family Comet",
+    HalleyTypeComet: "Halley-type Comet*",
+  },
+});
+orbitPane.on("change", (orbit) => {
+  // restart data each time this function is used
+  selectedData = spaceData;
+  if (orbit.value != "All") {
+    selectedData = selectedData.filter((d) => d.orbit_class == orbit.value);
+  } else {
     selectedData = spaceData;
-    renderChart()
-})
+  }
+  renderChart();
+});
 
+const restartPane = new Tweakpane.Pane({
+  container: document.querySelector("#data"),
+});
+
+const btn = restartPane.addButton({
+  title: "restart",
+});
+
+btn.on("click", () => {
+  selectedData = spaceData;
+  renderChart();
+});
+
+/////////////// scatterplot
+
+// const CIRCLE_MARGINS = { top: 30, bottom: 10 };
+// const CIRCLE_CHART_WIDTH = 800;
+// const CIRCLE_CHART_HEIGHT = 600 - CIRCLE_MARGINS.top - CIRCLE_MARGINS.bottom;
+
+// const radius = Math.min(CIRCLE_CHART_WIDTH,CIRCLE_CHART_HEIGHT)/2 - CIRCLE_MARGINS
+// const chartContainerCircle = d3
+//         .select("#chartCircle")
+//         .select(svg)
+//         .attr("width", CIRCLE_CHART_WIDTH)
+//         .attr("height", CIRCLE_CHART_HEIGHT + CIRCLE_MARGINS.top + CIRCLE_MARGINS.bottom)
+
+// // put the circle in the middle of the container
+// chartCircle = chartContainerCircle
+// .append("g")
+// .attr("transform", "translate(" + CIRCLE_CHART_WIDTH / 2 + "," + CIRCLE_CHART_HEIGHT / 2 + ")");
+
+// //
+
+// // set the color scale
+// const color = d3.scaleOrdinal()
+// .domain(["Y","N"])
+// .range(d3.schemeDark2)
+
+// function renderChartCircle(){
+
+// // make position for each group on the pie
+
+// const pie = d3.pie()
+//     .value(d => d.pha)
+//     // make sure values are in order from smallest to largest
+//     .sort(a,b => d3.ascending(a.pha,b.pha))
+
+// // we are still using selectedData
+// const data_ready = pie(d3.entries(selectedData))
+
+// // map circle to the data?
+// const u = chartCircle.selectAll("path")
+//     .data(data_ready)
+
+// //Build the pie chart: one arc at a time
+// .enter()
+// .append('path')
+// .merge(u)
+// .transition()
+// .duration(1000)
+// .attr('d', d3.arc()
+//   .innerRadius(0)
+//   .outerRadius(radius)
+// )
+// .attr('fill', d => color(d.pha))
+// .attr("stroke", "white")
+//     .style("stroke-width", "2px")
+//     .style("opacity", 1)
+
+//  // remove the group that is not present anymore
+//  u
+//  .exit()
+//  .remove()
+
+// }
+
+// renderChartCircle()
+
+const data = [2, 4, 8, 10, 14, 20];
+const CIRCLE_MARGINS = { top: 30, bottom: 10 },
+  CIRCLE_CHART_WIDTH = 800,
+  CIRCLE_CHART_HEIGHT = 600 - CIRCLE_MARGINS.top - CIRCLE_MARGINS.bottom;
+
+const radius = Math.min(CIRCLE_CHART_WIDTH, CIRCLE_CHART_HEIGHT) / 2;
+
+const chartContainerCircle = d3.select("#CircleSvg");
+chartContainerCircle.attr("width", CIRCLE_CHART_WIDTH).attr("height", CIRCLE_CHART_HEIGHT);
+
+const chartCircle = chartContainerCircle
+    .append("g")
+    .attr('transform', `translate(${CIRCLE_CHART_WIDTH/2},${CIRCLE_CHART_HEIGHT/2})`)
+
+
+const color = d3.scaleOrdinal(['red','orange','yellow','green','blue','purple']) // change this
+const pie = d3.pie()
+const arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(radius);
+// const arcs = chartCircle
+
+function renderChartCircle(){
+    chartCircle
+    .selectAll('arc')
+    .data(pie(data)) // change this
+    .enter()
+    .append('g')
+    .attr('class', 'arc')
+    .append('path') // change this
+    .attr('fill', (d,i) => color(i))
+    .attr('d', arc);
+}
+renderChartCircle()
