@@ -271,7 +271,7 @@ function TweakpaneControls() {
 
   hMagPane.addInput(PARAMS, "maxHMAG", {
     step: 0.1,
-    min: 16.2,
+    min: 19.2,
     max: 24.3,
   });
 
