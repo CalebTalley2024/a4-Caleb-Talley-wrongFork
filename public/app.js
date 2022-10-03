@@ -340,7 +340,6 @@ btn.on("click", () => {
 });
 
 
-
 // const data = ["2", "4", "8", 10, 14, 20];
 // const data1 = [{key:"hello",value:1},{key:"world",value:2}]
 const CIRCLE_MARGINS = { top: 30, bottom: 10 },
