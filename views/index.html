@@ -3,29 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>a4-CalebTalley2024</title>
-    <link rel = "stylesheet" href= "/style.css"> 
+    <title>a4-Caleb-Talley</title>
+    <link rel="stylesheet" href="/style.css" />
     <script src="https://d3js.org/d3.v5.min.js" defer></script>
     <script src="https://d3js.org/d3-scale.v3.min.js" defer></script>
-    <!-- this is used to make axes for our grpah-->
+    <!-- this is used to make axes for our graph-->
     <script src="https://cdn.jsdelivr.net/npm/d3-axis@3" defer></script>
     <!-- used for interaction -->
     <script src="https://cdn.jsdelivr.net/npm/tweakpane@3.1.0/dist/tweakpane.min.js"></script>
     <script src="/app.js" defer></script>
   </head>
   <body>
-    <div id="app">
-      <div id="chart">
-        <svg></svg>
-      </div>
-      <div id="data">
-        <ul></ul>
-      </div>
-      <div id="chartCircle">
-        <svg id = "CircleSvg"></svg>
-      </div>
-      <div id="dataCircle">
-        
+    <p class = "instructions"><h1 class = "instructions" >Data Visualization of  NASA's "Near-Earth Asteroids and Comets" Dataset.</h1></p>
+    <section class = "instructions" id = "instructions">
+
+
+    </section>
+    <div id="flex">
+      <div id="app">
+        <div class="chart" id="chart">
+          <ul><h2>Bar Graph:</h2>
+
+            <li>X axis: Different designations for each asteroid </li>
+            <li>Y axis: Period years for each asteroid</li> 
+          
+          </ul> 
+          <svg></svg>
+        </div>
+        <div id="data">
+          <ul class = "instructions"><h2>TweakPane:</h2>
+            <h3>use this  interface to change what data you are viewing</h3>
+            <li> <b>onlyPHA:</b> click the box to also see data for potentially hazardous asteroids ( PHA) </li>
+            <li> <b>maxHag:</b> slide to see the how many asteroids are below a certain aboslute magnitude (hMag) value </li>
+            <li> <b>onlyYear:</b> pick the year which you exclusively want to see data for </li>
+            <li> <b>OrbitClass:</b> pick the orbit class that you exclusively want to see </li>
+            <li> <b>"restart"</b> restores all your filters</li>
+          </ul>
+          <ul></ul>
+        </div>
+        <div class = "instructions"class="chart" id="chartCircle">
+          <ul><h2>Circle:</h2>
+            <h3>  Data: represent the amount of potentially hazardous asteroids (PHA), and non-potentially harzardous asteroids (nPHA)
+              <p> </p>
+            <li> PHA is colored <span style="color: red;"> red</span> </li>
+            <li> nPHA is colored  <span style="color: cyan">cyan</span></li>
+            
+          </ul>
+          <svg id="CircleSvg"></svg>
+        </div>
+        <div id="dataCircle"></div>
       </div>
     </div>
   </body>

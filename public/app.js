@@ -136,7 +136,7 @@ spaceData.forEach((a) => {
 // console.log(spaceData);
 
 const BAR_MARGINS = { top: 30, bottom: 10, left: 30, right: 20 };
-const CHART_WIDTH = 1200 - BAR_MARGINS.left - BAR_MARGINS.right;
+const CHART_WIDTH = 1000 - BAR_MARGINS.left - BAR_MARGINS.right;
 const CHART_HEIGHT = 800 - BAR_MARGINS.top - BAR_MARGINS.bottom;
 
 //x: Designation
@@ -375,7 +375,7 @@ const chartCircle = chartContainerCircle
     `translate(${CIRCLE_CHART_WIDTH / 2},${CIRCLE_CHART_HEIGHT / 2})`
   );
 
-const color = d3.scaleOrdinal(["cyan", "indigo"]); // change this
+const color = d3.scaleOrdinal(["#8F231B","cyan" ]); // change this
 const pie = d3.pie();
 const arc = d3.arc()
       .innerRadius(radius/2)
@@ -421,7 +421,7 @@ function renderChartCircle() {
     .data(labels)
     .enter()
     .append('text')
-    .text((d,i) => d.value)
+    .text((d,i) => "nPHA/ PHA")
     .style("text-anchor", "middle")
     .style("font-size", 17)
     .attr("fill", "white")

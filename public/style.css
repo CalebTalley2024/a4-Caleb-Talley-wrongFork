@@ -1,30 +1,49 @@
 
+
+
 html {
   font-family: sans-serif;
+  background-color: #263266;
 }
 
+.instructions{
+  color: #DBFAFF;
+
+
+}
+
+#instructions{
+  display:flex;
+  justify-content: space-around;
+  font-size: 25px;
+}
 #app {
   display: flex;
   margin: 2rem 1rem;
 }
+/* svg{
+  background-color: #DBFAFF;
+} */
 
 #chart {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   padding: 1rem;
+  background-color: #DBFAFF;
+  border-radius: 30px;
 }
 
-#chart,
+#chart,#chartCircle
 #data {
   margin: 0 2rem;
 }
 
-#data ul {
+/* #data ul {
   list-style: none;
   margin: 0;
   padding: 0;
-}
+} */
 
-#data li {
+/* #data li {
   margin-bottom: 1rem;
   padding: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -33,7 +52,7 @@ html {
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
-}
+} */
 
 /* .bar {
   fill: #4f009e;
@@ -41,4 +60,28 @@ html {
 
 .label {
   fill: #4f009e;
+}
+
+:root {
+  --tp-base-background-color: hsla(0, 80%, 40%, 1.00);
+  --tp-base-shadow-color: hsla(0, 0%, 0%, 0.2);
+  --tp-button-background-color: hsla(0, 0%, 100%, 1.00);
+  --tp-button-background-color-active: hsla(0, 0%, 85%, 1.00);
+  --tp-button-background-color-focus: hsla(0, 0%, 90%, 1.00);
+  --tp-button-background-color-hover: hsla(0, 0%, 95%, 1.00);
+  --tp-button-foreground-color: hsla(230, 20%, 11%, 1.00);
+  --tp-container-background-color: hsla(0, 0%, 0%, 0.20);
+  --tp-container-background-color-active: hsla(0, 0%, 0%, 0.35);
+  --tp-container-background-color-focus: hsla(0, 0%, 0%, 0.30);
+  --tp-container-background-color-hover: hsla(0, 0%, 0%, 0.25);
+  --tp-container-foreground-color: hsla(0, 0%, 100%, 0.90);
+  --tp-groove-foreground-color: hsla(0, 0%, 0%, 0.50);
+  --tp-input-background-color: hsla(0, 0%, 0%, 0.50);
+  --tp-input-background-color-active: hsla(0, 0%, 0%, 0.65);
+  --tp-input-background-color-focus: hsla(0, 0%, 0%, 0.60);
+  --tp-input-background-color-hover: hsla(0, 0%, 0%, 0.55);
+  --tp-input-foreground-color: hsla(0, 0%, 100%, 0.90);
+  --tp-label-foreground-color: hsla(0, 0%, 100%, 0.90);
+  --tp-monitor-background-color: hsla(0, 0%, 0%, 0.50);
+  --tp-monitor-foreground-color: hsla(0, 0%, 100%, 0.50);
 }

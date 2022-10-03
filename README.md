@@ -2,12 +2,15 @@
 
 ## Your Web Application Title
 
-your hosting link e.g. 
+Hosting Link - ___________
 
-Include a very brief summary of your project here. Images are encouraged when needed, along with concise, high-level text. Be sure to include:
+The goal of this application is to display bar graph and donut/pie chart data visualizations. The data comes from NASA's "Near-Earth Asteroids and Comets" dataset. This application was created by mainly using JavaScript Library D3.js. the Tweakpane Library and NodeJS were also used.
 
-used TweakPane, D3 ( axis, etc)
 
-- the goal of the application
-- challenges you faced in realizing the application
+The main challenges I faced when doing this project
+- Getting to Bar Chart and Pie chart to appear on the page
+- initially learning the basics of D3
+- fixing errors due to adding a string to a number (eg. 1 + "1" = 11, which messed up my y axis)
+
+
 - the instructions you present in the website should be clear enough to use the application, but if you feel any need to provide additional instructions please do so here.
